@@ -11,7 +11,7 @@
     <property name="build.classes.dir" value="${build.dir}/classes"/>
     <property name="dist.dir" value="dist"/>
     <property name="dist.jar" value="${dist.dir}/ScientificCalculator-Assignment.jar"/>
-    <property name="main.class" value="scientificcalculator.ScientificCalculator"/>
+    <property name="main.class" value="scientificcalculator.Main"/>
 
     <target name="-init">
         <mkdir dir="${build.classes.dir}"/>
