@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ScientificCalculator-Assignment" default="default" basedir=".">
+    <description>Builds and runs the Scientific Calculator assignment project.</description>
+    
+    <!-- Load project properties -->
+    <property file="nbproject/project.properties"/>
+    
+    <!-- Fallback property defaults if not set -->
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="build.classes.dir" value="${build.dir}/classes"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="dist.jar" value="${dist.dir}/ScientificCalculator-Assignment.jar"/>
+    <property name="main.class" value="scientificcalculator.ScientificCalculator"/>
+
+    <target name="-init">
+        <mkdir dir="${build.classes.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+    </target>
+
+    <!-- Default target runs the application -->
+    <target name="default" depends="run" description="Default build and run"/>
+
+    <!-- Compile target -->
+    <target name="compile" depends="-init" description="Compile the source code">
+        <javac srcdir="${src.dir}" 
+               destdir="${build.classes.dir}" 
+               includeantruntime="false" 
+               encoding="UTF-8"/>
+    </target>
+
+    <!-- Run Project target -->
+    <target name="run" depends="compile" description="Run the Scientific Calculator">
+        <java classname="${main.class}" classpath="${build.classes.dir}" fork="true">
+            <jvmarg value="-Dfile.encoding=UTF-8"/>
+        </java>
+    </target>
+
+    <!-- Run Single File (Shift+F6 in NetBeans) -->
+    <target name="run-single" depends="compile" description="Run a single class file">
+        <fail unless="run.class">Must set property 'run.class'</fail>
+        <java classname="${run.class}" classpath="${build.classes.dir}" fork="true">
+            <jvmarg value="-Dfile.encoding=UTF-8"/>
+        </java>
+    </target>
+
+    <!-- Clean and Build -->
+    <target name="clean" description="Clean build artifacts">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <target name="jar" depends="compile" description="Package application into JAR">
+        <jar destfile="${dist.jar}" basedir="${build.classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="${main.class}"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="rebuild" depends="clean,compile,jar" description="Clean and build all"/>
+</project>
